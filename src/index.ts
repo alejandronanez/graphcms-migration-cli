@@ -17,9 +17,14 @@ const cliArguments = yargs(process.argv.slice(2)).options({
        instructions there to get it
       `,
   },
+  env: {
+    type: 'string',
+    alias: 'environment',
+    description: `Your environment URL / endpoint`,
+  },
 }).argv;
 
-if (!cliArguments.pat) {
+if (!cliArguments.pat || !cliArguments.env) {
   throw new Error('Permanent Auth Token is required');
 }
 
