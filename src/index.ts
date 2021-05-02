@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { runMigrations } from './migrations';
+import { populateContent } from './populateContent';
 const yargs = require('yargs/yargs');
 
 /**
@@ -30,5 +31,7 @@ if (!authToken || !endpoint) {
   throw new Error('Permanent Auth Token is required');
 }
 
-runMigrations({ authToken, endpoint });
-
+(async () => {
+  await runMigrations({ authToken, endpoint });
+  await populateContent({ authToken, endpoint });
+})();
