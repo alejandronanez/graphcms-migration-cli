@@ -10,6 +10,9 @@
   "engines": {
     "node": ">=10"
   },
+  "bin": {
+    "migrate": "./dist/index.js"
+  },
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -17,9 +20,9 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "graphcms-migrate": "node dist/index.js"
   },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -45,11 +48,19 @@
     }
   ],
   "devDependencies": {
+    "@graphcms/management": "^1.1.0",
     "@size-limit/preset-small-lib": "^4.10.2",
+    "@types/faker": "^5.5.3",
     "husky": "^6.0.0",
     "size-limit": "^4.10.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.2.0",
     "typescript": "^3.9.9"
+  },
+  "dependencies": {
+    "date-fns": "^2.21.1",
+    "faker": "^5.5.3",
+    "graphql": "^15.5.0",
+    "graphql-request": "^3.4.0"
   }
 }
