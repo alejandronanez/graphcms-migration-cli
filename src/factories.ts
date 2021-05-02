@@ -8,7 +8,7 @@ function dateFormatter(dateString: string) {
 
 export function petFactory(limit: number = 3): Pet[] {
   return Array.from({ length: limit }).map(_ => ({
-    adopted: faker.datatype.boolean(),
+    adopted: false,
     background: faker.lorem.sentences(),
     birthday: dateFormatter(faker.date.past()),
     goodForKids: faker.datatype.boolean(),
