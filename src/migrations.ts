@@ -1,4 +1,4 @@
-import { newMigration } from '@graphcms/management';
+import { FieldType, newMigration } from '@graphcms/management';
 
 type MigrationConfigParams = {
   authToken: string;
@@ -13,10 +13,16 @@ async function createMyModel({ authToken, endpoint }: MigrationConfigParams) {
     endpoint,
   });
 
-  migration.createModel({
+  const newModel = migration.createModel({
     apiId: 'MyModel',
     apiIdPlural: 'MyModels',
     displayName: 'MyModelDisplay',
+  });
+
+  newModel.addSimpleField({
+    apiId: 'title',
+    displayName: 'The Title',
+    type: FieldType.String,
   });
 
   const { errors, status, name } = await migration.run(
