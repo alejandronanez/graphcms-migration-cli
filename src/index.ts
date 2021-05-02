@@ -1,31 +1,34 @@
 #!/usr/bin/env node
+import { runMigrations } from './migrations';
+const yargs = require('yargs/yargs');
+
 /**
  * TODO:
  * - [ ] I want to create a schema from zero
  * - [ ] I want to reset the schema
  * - [ ] I want to update an existing schema
  */
-const yargs = require('yargs/yargs');
 
 const cliArguments = yargs(process.argv.slice(2)).options({
-  pat: {
+  authToken: {
     type: 'string',
-    alias: 'permanentAuthToken',
     demandOption: true,
     description: `Permanent Auth Token used to run migrations against your GraphCMS space
        please, refer to https://graphcms.com/docs/develop/management-sdk and follow the
        instructions there to get it
       `,
   },
-  env: {
+  endpoint: {
     type: 'string',
-    alias: 'environment',
     description: `Your environment URL / endpoint`,
   },
 }).argv;
 
-if (!cliArguments.pat || !cliArguments.env) {
+const { authToken, endpoint } = cliArguments;
+
+if (!authToken || !endpoint) {
   throw new Error('Permanent Auth Token is required');
 }
 
-console.log(`pat: ${cliArguments.pat}`);
+runMigrations({ authToken, endpoint });
+
